@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:praktikum/Screens/Login/components/background.dart';
+import 'package:praktikum/Screens/Signup/signup_screen.dart';
+import 'package:praktikum/components/already_have_an_account.dart';
 import 'package:praktikum/components/rounded_Input_field.dart';
 import 'package:praktikum/components/rounded_button.dart';
 import 'package:praktikum/components/rounded_password_field.dart';
@@ -24,9 +26,15 @@ class Body extends StatelessWidget {
               'LOGIIN',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             Image.asset(
               'assets/images/login.jpg',
               height: size.height * 0.35,
+            ),
+            SizedBox(
+              height: size.height * 0.03,
             ),
             RoundedInputField(
               hintText: "Email Address",
@@ -36,41 +44,19 @@ class Body extends StatelessWidget {
               onChanged: (value) {},
             ),
             RoundedButton(text: "LOGIN", press: () {}),
-            AlreadyHaveAnAccountCheck()
-          ]),
-    );
-  }
-}
-
-class AlreadyHaveAnAccountCheck extends StatelessWidget {
-  final bool login;
-  final Function press;
-  const AlreadyHaveAnAccountCheck({
-    Key? key,
-    this.login = true,
-    required this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          login ? "Don't have an Account ? " : "Already have an Account ?",
-          style: TextStyle(color: kPrimaryColor),
-        ),
-        GestureDetector(
-          onTap: press,
-          child: Text(
-            login ? "Sign Up" : "Sign In",
-            style: TextStyle(
-              color: kPrimaryColor,
-              fontWeight: FontWeight.bold,
+            SizedBox(
+              height: size.height * 0.03,
             ),
-          ),
-        )
-      ],
+            AlreadyHaveAnAccountCheck(
+              press: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return SignUpScreen();
+                  },
+                ));
+              },
+            )
+          ]),
     );
   }
 }
